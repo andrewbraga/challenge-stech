@@ -25,7 +25,7 @@ namespace WebApi
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Profits Distribution API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Profits Sharing API", Version = "v1" });
             });
         }
 
@@ -50,7 +50,7 @@ namespace WebApi
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Profits Distribution API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Profits Sharing API V1");
             });
 
             app.UseRouting();
