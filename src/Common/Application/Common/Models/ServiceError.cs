@@ -32,9 +32,9 @@ namespace Application.Common.Models
         {
             const string ARGUMENT_EXCEPTION_MESSAGE = "Parâmetro com valor inválido.";
 
-            if (string.IsNullOrEmpty(this.Message)) throw new ArgumentException(ARGUMENT_EXCEPTION_MESSAGE, nameof(this.Message));
+            if (string.IsNullOrEmpty(message)) throw new ArgumentException(ARGUMENT_EXCEPTION_MESSAGE, nameof(this.Message));
 
-            if (this.Code < 1) throw new ArgumentException(ARGUMENT_EXCEPTION_MESSAGE, nameof(this.Code));
+            if (code < 1) throw new ArgumentException(ARGUMENT_EXCEPTION_MESSAGE, nameof(this.Code));
 
             this.Message = message;
             this.Code = code;

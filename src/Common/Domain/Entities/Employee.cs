@@ -104,7 +104,7 @@ namespace Domain.Entities
         { 
             get 
             {
-                if (decimal.TryParse(Salary.Replace("R$ ", string.Empty), out decimal salaryDecimal))
+                if (!string.IsNullOrEmpty(Salary) && decimal.TryParse(Salary.Replace("R$ ", string.Empty), out decimal salaryDecimal))
                     return salaryDecimal;
                 else
                     throw new ArgumentException(INVALID_ATTRIBUTE_MESSAGE, nameof(Salary));
@@ -169,15 +169,18 @@ namespace Domain.Entities
 
                 const string CUSTOMER_RELATIONSHIP = "Relacionamento com o Cliente";
 
-                if (OccupationArea.Equals(BOARD, StringComparison.InvariantCultureIgnoreCase)) return SCORE_1;
+                if(!string.IsNullOrEmpty(OccupationArea))
+                {
+                    if (OccupationArea.Equals(BOARD, StringComparison.InvariantCultureIgnoreCase)) return SCORE_1;
 
-                if (OccupationArea.Equals(ACCOUNTING, StringComparison.InvariantCultureIgnoreCase) ||
-                    OccupationArea.Equals(FINANCIAL, StringComparison.InvariantCultureIgnoreCase) ||
-                    OccupationArea.Equals(TECHNOLOGY, StringComparison.InvariantCultureIgnoreCase)) return SCORE_2;
+                    if (OccupationArea.Equals(ACCOUNTING, StringComparison.InvariantCultureIgnoreCase) ||
+                        OccupationArea.Equals(FINANCIAL, StringComparison.InvariantCultureIgnoreCase) ||
+                        OccupationArea.Equals(TECHNOLOGY, StringComparison.InvariantCultureIgnoreCase)) return SCORE_2;
 
-                if (OccupationArea.Equals(GENERAL_SERVICES, StringComparison.InvariantCultureIgnoreCase)) return SCORE_3;
+                    if (OccupationArea.Equals(GENERAL_SERVICES, StringComparison.InvariantCultureIgnoreCase)) return SCORE_3;
 
-                if (OccupationArea.Equals(CUSTOMER_RELATIONSHIP, StringComparison.InvariantCultureIgnoreCase)) return SCORE_5;
+                    if (OccupationArea.Equals(CUSTOMER_RELATIONSHIP, StringComparison.InvariantCultureIgnoreCase)) return SCORE_5;
+                }
 
                 throw new ArgumentException(INVALID_ATTRIBUTE_MESSAGE, nameof(OccupationArea));
             }
