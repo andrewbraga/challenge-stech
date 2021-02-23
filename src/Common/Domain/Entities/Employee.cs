@@ -104,7 +104,8 @@ namespace Domain.Entities
         { 
             get 
             {
-                if (!string.IsNullOrEmpty(Salary) && decimal.TryParse(Salary.Replace("R$ ", string.Empty), out decimal salaryDecimal))
+                if (!string.IsNullOrEmpty(Salary) && 
+                    decimal.TryParse(Salary.Replace("R$ ", string.Empty).Replace(".", string.Empty).Replace(",", "."), out decimal salaryDecimal))
                     return salaryDecimal;
                 else
                     throw new ArgumentException(INVALID_ATTRIBUTE_MESSAGE, nameof(Salary));

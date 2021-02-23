@@ -33,7 +33,7 @@ namespace Application.UnitTests.ProfitSharing.Queries.GetProfitSharing
             var data = succeed ? new ProfitsSharingDTO() : null;
             var serviceError = succeed ? null : ServiceError.DefaultError;
             var getProfitSharingQuery = new GetProfitSharingQuery(totalAvailable);
-            var getProfitSharingQueryHandler = new GetProfitSharingQueryHandler();
+            var getProfitSharingQueryHandler = new GetProfitSharingQueryHandler(null);
             var result = getProfitSharingQueryHandler.Handle(getProfitSharingQuery, CancellationToken.None).Result;
 
             Assert.Equal(succeed, result.Succeeded);

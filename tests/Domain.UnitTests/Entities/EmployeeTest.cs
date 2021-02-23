@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using Domain.Entities;
 using Xunit;
 
@@ -184,9 +183,11 @@ namespace Domain.UnitTests.Entities
                             admissionDurationScore == 5 ? DateTime.Today.AddYears(8).AddDays(1) :
                             DateTime.Today.AddYears(1);
 
+            var cultureInfo = new CultureInfo("pt-BR");
+
             var employee = new Employee()
             {
-                Salary = salary.ToString(),
+                Salary = salary.ToString("C", cultureInfo),
                 AdmissionDate = admission.ToString("yyyy-MM-dd"),
                 OccupationArea = occupationArea
             };

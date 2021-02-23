@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Models;
 using Application.DTO;
 using Domain.Entities;
+using Infrastructure.Persistence.Interfaces;
 using MediatR;
 
 namespace Application.ProfitSharing.Queries.GetProfitSharing
@@ -42,6 +44,37 @@ namespace Application.ProfitSharing.Queries.GetProfitSharing
     /// </summary>
     public class GetProfitSharingQueryHandler : IRequestHandler<GetProfitSharingQuery, ServiceResult<ProfitsSharingDTO>>
     {
+        #region Constants
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private const string EMPLOYEE_KEY = "Funcionarios";
+
+        #endregion
+
+        #region Private Properties
+
+        /// <summary>
+        /// Conexão de dados da aplicação
+        /// </summary>
+        private IRedisConnection Connection { get; }
+
+        #endregion
+
+        #region Public Constructors
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="connection">Conexão de dados da aplicação</param>
+        public GetProfitSharingQueryHandler(IRedisConnection connection)
+        {
+            Connection = connection;
+        }
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
@@ -52,7 +85,7 @@ namespace Application.ProfitSharing.Queries.GetProfitSharing
         /// <returns></returns>
         public async Task<ServiceResult<ProfitsSharingDTO>> Handle(GetProfitSharingQuery request, CancellationToken cancellationToken)
         {
-            var employees = new List<Employee>();
+            var employees = JsonSerializer.Deserialize<IEnumerable<Employee>>(Connection.GetValueFromKey(EMPLOYEE_KEY));
 
             if (!employees.Any())
             {
