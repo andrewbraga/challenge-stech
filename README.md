@@ -24,7 +24,7 @@ Essa solução foi criada para atender o desafio da Stone Co., para resolver o c
 Abra o CLI na pasta do projeto e execute o comentário abaixo. 
 
 ```powershell
-PS stech-challenge> docker-compose up
+PS challenge-stech> docker-compose up
 ```
 `docker-compose.yml` extrai e executa as imagens do Redis, ElasticSearch e Kibana.
 
@@ -88,5 +88,5 @@ Logs no Elasticsearch usando Serilog e visualização de logs no Kibana.
 
 ## Suporte
 
-Se você estiver tendo problemas, informe-nos [criando uma nova issue](https://github.com/andrewbraga/stech-challenge/issues/new/choose).
+Se você estiver tendo problemas, informe-nos [criando uma nova issue](https://github.com/andrewbraga/stech-challenge/issues/new).
 
