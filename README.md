@@ -88,5 +88,5 @@ Logs no Elasticsearch usando Serilog e visualização de logs no Kibana.
 
 ## Suporte
 
-Se você estiver tendo problemas, informe-nos [criando uma nova issue](https://github.com/andrewbraga/stech-challenge/issues/new).
+Se você estiver tendo problemas, informe-nos [criando uma nova issue](https://github.com/andrewbraga/challenge-stech/issues/new).
 
