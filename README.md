@@ -1,6 +1,6 @@
-ï»¿ # API de distribuiÃ§Ã£o de lucros
+ï»¿ # API de distribuição de lucros
 
-Essa soluÃ§Ã£o foi criada para atender o desafio da Stone Co., para resolver o cÃ¡lculo da distribuiÃ§Ã£o do lucros entre os funcionÃ¡rios cadastrados na base de dados.
+Essa solução foi criada para atender o desafio da Stone Co., para resolver o cálculo da distribuição do lucros entre os funcionários cadastrados na base de dados.
 
 
 ## Tecnologias
@@ -12,81 +12,81 @@ Essa soluÃ§Ã£o foi criada para atender o desafio da Stone Co., para resolver o c
 * Elasticsearch, Serilog, Kibana
 
 
-#### PrÃ©-requisitos
+#### Pré-requisitos
 
-* Baixe e instale a Ãºltima versÃ£o do [.NET SDK](https://dotnet.microsoft.com/download)
+* Baixe e instale a última versão do [.NET SDK](https://dotnet.microsoft.com/download)
 * Baixe e instale o [Docker Desktop](https://www.docker.com/products/docker-desktop)
-* Baixe e instale a Ãºltima versÃ£o do [Visual Studio 2019](https://visualstudio.microsoft.com/pt-br/downloads)
+* Baixe e instale a última versão do [Visual Studio 2019](https://visualstudio.microsoft.com/pt-br/downloads)
 
 
-## Subir a aplicaÃ§Ã£o no Docker Compose
+## Subir a aplicação no Docker Compose
 
-Abra o CLI na pasta do projeto e execute o comentÃ¡rio abaixo. 
+Abra o CLI na pasta do projeto e execute o comentário abaixo. 
 
 ```powershell
 PS stech-challenge> docker-compose up
 ```
 `docker-compose.yml` extrai e executa as imagens do Redis, ElasticSearch e Kibana.
 
-Se vocÃª estiver executando o Windows 10 pela primeira vez [WSL 2 (Windows Subsystem for Linux)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) Linux Container for Docker, vocÃª provavelmente obterÃ¡ o seguinte erro no docker
+Se você estiver executando o Windows 10 pela primeira vez [WSL 2 (Windows Subsystem for Linux)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) Linux Container for Docker, você provavelmente obterá o seguinte erro no docker
 
 `Erro:` max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 
-`SoluÃ§Ã£o:` Abra o Linux WSL 2 terminal e execute o comando `sudo sysctl -w vm.max_map_count=262144`para mudar a memÃ³ria virtual do Linux.
+`Solução:` Abra o Linux WSL 2 terminal e execute o comando `sudo sysctl -w vm.max_map_count=262144`para mudar a memória virtual do Linux.
 
 
-## Debugar no Docker Compose (Utilizando instÃ¢ncia local do Redis)
+## Debugar no Docker Compose (Utilizando instância local do Redis)
 
-1. Clone o repositÃ³rio em uma pasta local de sua preferÃªncia
+1. Clone o repositório em uma pasta local de sua preferência
 2. Abra o arquivo **Stech.Challenge.sln** na pasta local, para abrir a solution no Visual Studio
 3. Abrir a janela de propriedade do projeto **WebApi** e clicar na aba **Debug**
-4. Alterar o valor da variÃ¡vel de ambiente **ASPNETCORE_ENVIRONMENT** para **Local**
-5. Na aba **Solution Explorer**, escolher **docker-compose** como inicializaÃ§Ã£o do projeto
-6. Clicar no botÃ£o *Docker Compose* no barra de ferramentas acima
-7. Abrir no browser o endereÃ§o https://localhost:5005/swagger para visualizar o Swagger
+4. Alterar o valor da variável de ambiente **ASPNETCORE_ENVIRONMENT** para **Local**
+5. Na aba **Solution Explorer**, escolher **docker-compose** como inicialização do projeto
+6. Clicar no botão **Docker Compose** no barra de ferramentas acima
+7. Abrir no browser o endereço https://localhost:5005/swagger para visualizar o Swagger
 
 
 ## Debugar no IIS Express (Utilizando Redis Cloud)
 
-1. Clone o repositÃ³rio em uma pasta local de preferÃªncia
+1. Clone o repositório em uma pasta local de preferência
 2. Abra o arquivo **Stech.Challenge.sln** na pasta local, para abrir a solution no Visual Studio
 3. Abrir a janela de propriedade do projeto **WebApi** e clicar na aba **Debug**
-4. Alterar o valor da variÃ¡vel de ambiente **ASPNETCORE_ENVIRONMENT** para **Development**
-5. Na aba **Solution Explorer**, escolher **WebApi** como inicializaÃ§Ã£o do projeto
-6. Clicar no botÃ£o *IIS Express* no barra de ferramentas acima
-7. Abrir no browser o endereÃ§o https://localhost:5005/swagger para visualizar o Swagger
+4. Alterar o valor da variável de ambiente **ASPNETCORE_ENVIRONMENT** para **Development**
+5. Na aba **Solution Explorer**, escolher **WebApi** como inicialização do projeto
+6. Clicar no botão **IIS Express** no barra de ferramentas acima
+7. Abrir no browser o endereço https://localhost:5005/swagger para visualizar o Swagger
 
 
 ### Popular o banco de dados
 
-Existe uma rotina sendo chamada dentro da classe **Program.cs** do projeto **WebApi**, que verifica se o banco de dados estÃ¡ populado toda vez que a aplicaÃ§Ã£o Ã© inicializada. Caso nÃ£o esteja, a rotina irÃ¡ popular. 
+Existe uma rotina sendo chamada dentro da classe **Program.cs** do projeto **WebApi**, que verifica se o banco de dados está populado toda vez que a aplicação é inicializada. Caso não esteja, a rotina irá popular. 
 
 
-## VisÃ£o Geral
+## Visão Geral
 
 ### Domain
 
-Essa camada contÃ©m todas as entidades e lÃ³gicas especÃ­ficas da aplicaÃ§Ã£o.
+Essa camada contém todas as entidades e lógicas específicas da aplicação.
 
 ### Application
 
-Esta camada contÃ©m toda a lÃ³gica da aplicaÃ§Ã£o. Ã‰ dependente da camada de domÃ­nio, mas nÃ£o tem dependÃªncias de nenhuma outra camada ou projeto. Esta camada define interfaces que sÃ£o implementadas por camadas externas. Por exemplo, se a aplicaÃ§Ã£o precisar acessar um serviÃ§o de notificaÃ§Ã£o, uma nova interface seria adicionada a aplicaÃ§Ã£o e uma implementaÃ§Ã£o seria criada dentro da infraestrutura.
+Esta camada contém toda a lógica da aplicação. É dependente da camada de domínio, mas não tem dependências de nenhuma outra camada ou projeto. Esta camada define interfaces que são implementadas por camadas externas. Por exemplo, se a aplicação precisar acessar um serviço de notificação, uma nova interface seria adicionada a aplicação e uma implementação seria criada dentro da infraestrutura.
 
 ### Infrastructure
 
-Essa camada contÃ©m classes para acessar recursos externos, como banco de dados, entre outros. Essas classes devem ser baseadas em interfaces definidas na camada da aplicaÃ§Ã£o.
+Essa camada contém classes para acessar recursos externos, como banco de dados, entre outros. Essas classes devem ser baseadas em interfaces definidas na camada da aplicação.
 
 ### WebApi
 
-Esta camada Ã© um aplicativo de API da Web baseado em ASP.NET 5.0.x. Essa camada depende das camadas da aplicaÃ§Ã£o e infraestrutura, no entanto, a dependÃªncia da infraestrutura Ã© apenas para oferecer suporte Ã  injeÃ§Ã£o de dependÃªncia. Portanto, apenas * Startup.cs * deve fazer referÃªncia a Infraestrutura.
+Esta camada é um aplicativo de API da Web baseado em ASP.NET 5.0.x. Essa camada depende das camadas da aplicação e infraestrutura, no entanto, a dependência da infraestrutura é apenas para oferecer suporte à injeção de dependência. Portanto, apenas **Startup.cs** deve fazer referência a Infraestrutura.
 
 
 ### Logs
 
-Logs no Elasticsearch usando Serilog e visualizaÃ§Ã£o de logs no Kibana.
+Logs no Elasticsearch usando Serilog e visualização de logs no Kibana.
 
 
 ## Suporte
 
-Se vocÃª estiver tendo problemas, informe-nos [criando uma nova issue](https://github.com/andrewbraga/stech-challenge/issues/new/choose).
+Se você estiver tendo problemas, informe-nos [criando uma nova issue](https://github.com/andrewbraga/stech-challenge/issues/new/choose).
 
