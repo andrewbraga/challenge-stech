@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using Domain.Entities;
 using Xunit;
 
@@ -73,14 +72,16 @@ namespace Domain.UnitTests.Entities
         {
             const decimal MINIMUM_SALARY = 1100;
 
-            var admission = admissionDurationScore == 2 ? DateTime.Today.AddYears(3) :
-                            admissionDurationScore == 3 ? DateTime.Today.AddYears(8) :
-                            admissionDurationScore == 5 ? DateTime.Today.AddYears(8).AddDays(1) :
-                            DateTime.Today.AddYears(1);
+            var admission = admissionDurationScore == 2 ? DateTime.Today.AddYears(-3) :
+                            admissionDurationScore == 3 ? DateTime.Today.AddYears(-8) :
+                            admissionDurationScore == 5 ? DateTime.Today.AddYears(-8).AddDays(-1) :
+                            DateTime.Today.AddYears(-1);
+
+            var cultureInfo = new CultureInfo("pt-BR");
 
             var employee = new Employee()
             {
-                Salary = "R$ 1.100,00",
+                Salary = MINIMUM_SALARY.ToString("C", cultureInfo),
                 AdmissionDate = admission.ToString("yyyy-MM-dd"),
                 JobTitle = "Estagiário",
                 OccupationArea = occupationArea
@@ -179,15 +180,18 @@ namespace Domain.UnitTests.Entities
                          salaryRangeScore == 5 ? ((MINIMUM_SALARY * 8) + 1) :
                          MINIMUM_SALARY * 3;
 
-            var admission = admissionDurationScore == 2 ? DateTime.Today.AddYears(3) :
-                            admissionDurationScore == 3 ? DateTime.Today.AddYears(8) :
-                            admissionDurationScore == 5 ? DateTime.Today.AddYears(8).AddDays(1) :
-                            DateTime.Today.AddYears(1);
+            var admission = admissionDurationScore == 2 ? DateTime.Today.AddYears(-3) :
+                            admissionDurationScore == 3 ? DateTime.Today.AddYears(-8) :
+                            admissionDurationScore == 5 ? DateTime.Today.AddYears(-8).AddDays(-1) :
+                            DateTime.Today.AddYears(-1);
+
+            var cultureInfo = new CultureInfo("pt-BR");
 
             var employee = new Employee()
             {
-                Salary = salary.ToString(),
+                Salary = salary.ToString("C", cultureInfo),
                 AdmissionDate = admission.ToString("yyyy-MM-dd"),
+                JobTitle = string.Empty,
                 OccupationArea = occupationArea
             };
 

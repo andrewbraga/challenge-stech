@@ -1,3 +1,5 @@
+using Application.Extensions;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,16 +11,40 @@ namespace WebApi
 {
     public class Startup
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Configuração da aplicação
+        /// </summary>
+        public IConfiguration Configuration { get; }
+
+        #endregion
+
+        #region Public Constructors
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="configuration">Configuração da aplicação</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        #endregion
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        #region Public Methods
+
+        /// <summary>
+        /// Esse método é chamado em tempo de execução. Use esse método para adicionar serviços ao container.
+        /// </summary>
+        /// <param name="services">Serviços da aplicação</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
+
+            services.AddInfrastructure(Configuration);
+
             services.AddControllers();
 
             services.AddHealthChecks();
@@ -29,7 +55,11 @@ namespace WebApi
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Esse método é chamado em tempo de execução. Use esse método para configurar pipeline de requisição HTTP.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -62,5 +92,7 @@ namespace WebApi
                 endpoints.MapControllers();
             });
         }
+
+        #endregion
     }
 }

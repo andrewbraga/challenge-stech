@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json.Serialization;
 
@@ -26,7 +27,7 @@ namespace Application.DTO
         {
             get
             {
-                throw new NotImplementedException();
+                return EmployeeQuantity.ToString("N0", CultureInfo);
             }
         }
 
@@ -38,7 +39,7 @@ namespace Application.DTO
         {
             get
             {
-                throw new NotImplementedException();
+                return TotalSharing.ToString("C", CultureInfo);
             }
         }
 
@@ -50,7 +51,7 @@ namespace Application.DTO
         {
             get
             {
-                throw new NotImplementedException();
+                return TotalAvailable.ToString("C", CultureInfo);
             }
         }
 
@@ -62,13 +63,18 @@ namespace Application.DTO
         {
             get
             {
-                throw new NotImplementedException();
+                return TotalBalanceAvailable.ToString("C", CultureInfo);
             }
         }
 
         #endregion
 
         #region Private Properties
+
+        /// <summary>
+        /// Cultura Português Brasileiro
+        /// </summary>
+        private CultureInfo CultureInfo { get; } = new CultureInfo("pt-BR");
 
         /// <summary>
         /// Total disponibilizado

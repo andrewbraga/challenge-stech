@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace Application.DTO
@@ -8,6 +9,7 @@ namespace Application.DTO
     /// </summary>
     public class ProfitSharingEmployeeDTO
     {
+
         #region Public Properties
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace Application.DTO
         {
             get
             {
-                throw new NotImplementedException();
+                return ProfitSharing.ToString("C", CultureInfo);
             }
         }
 
@@ -39,6 +41,15 @@ namespace Application.DTO
         /// </summary>
         [JsonIgnore]
         public decimal ProfitSharing { get; set; }
+
+        #endregion
+
+        #region Private Properties
+
+        /// <summary>
+        /// Cultura Português Brasileiro
+        /// </summary>
+        private CultureInfo CultureInfo { get; } = new CultureInfo("pt-BR");
 
         #endregion
     }

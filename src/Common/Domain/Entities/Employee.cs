@@ -104,7 +104,8 @@ namespace Domain.Entities
         { 
             get 
             {
-                if (!string.IsNullOrEmpty(Salary) && decimal.TryParse(Salary.Replace("R$ ", string.Empty), out decimal salaryDecimal))
+                if (!string.IsNullOrEmpty(Salary) && 
+                    decimal.TryParse(Salary.Replace("R$ ", string.Empty).Replace(".", string.Empty).Replace(",", "."), out decimal salaryDecimal))
                     return salaryDecimal;
                 else
                     throw new ArgumentException(INVALID_ATTRIBUTE_MESSAGE, nameof(Salary));
@@ -136,11 +137,11 @@ namespace Domain.Entities
         {
             get
             {
-                if (Admission.AddYears(1) > DateTime.Today && Admission.AddYears(3) < DateTime.Today) return SCORE_2;
+                if (Admission.AddYears(8) < DateTime.Today) return SCORE_5;
 
-                if (Admission.AddYears(3) > DateTime.Today && Admission.AddYears(8) < DateTime.Today) return SCORE_3;
+                if (Admission.AddYears(3) < DateTime.Today) return SCORE_3;
 
-                if (Admission.AddYears(8) > DateTime.Today) return SCORE_5;
+                if (Admission.AddYears(1) < DateTime.Today) return SCORE_2;
 
                 return SCORE_1;
             }
@@ -204,9 +205,9 @@ namespace Domain.Entities
                 if (JobTitle.Equals(INTERN, StringComparison.InvariantCultureIgnoreCase) ||
                     SalaryDecimal <= (MINIMUM_SALARY * 3)) return SCORE_1;
 
-                if (SalaryDecimal > (MINIMUM_SALARY * 3) && SalaryDecimal < (MINIMUM_SALARY * 5)) return SCORE_2;
+                if (SalaryDecimal > (MINIMUM_SALARY * 3) && SalaryDecimal <= (MINIMUM_SALARY * 5)) return SCORE_2;
 
-                if (SalaryDecimal > (MINIMUM_SALARY * 5) && SalaryDecimal < (MINIMUM_SALARY * 8)) return SCORE_3;
+                if (SalaryDecimal > (MINIMUM_SALARY * 5) && SalaryDecimal <= (MINIMUM_SALARY * 8)) return SCORE_3;
 
                 return SCORE_5;
             }
