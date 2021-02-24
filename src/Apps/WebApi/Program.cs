@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Interfaces;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,7 @@ namespace WebApi
         /// Método Principal da aplicação
         /// </summary>
         /// <param name="args">Argumentos</param>
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
@@ -31,9 +32,9 @@ namespace WebApi
 
                 try
                 {
-                    var connection = services.GetRequiredService<IRedisConnection>();
+                    var applicationDb = services.GetRequiredService<IApplicationDb>();
 
-                    DatabaseSeed.SeedSampleEmployeeData(connection);
+                    DbSeed.SeedSampleEmployeeData(applicationDb);
                 }
                 catch (Exception ex)
                 {
@@ -45,7 +46,7 @@ namespace WebApi
                 }
             }
 
-            host.RunAsync();
+            await host.RunAsync();
         }
 
         /// <summary>

@@ -4,8 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Extensions
 {
+    /// <summary>
+    /// Extensão para a injeção de dependência
+    /// </summary>
     public static class DependencyInjectionExtension
     {
+        #region Public Methods
+
         /// <summary>
         /// Adiciona as injeções de dependência da camada Infrastructure
         /// </summary>
@@ -17,5 +22,7 @@ namespace Application.Extensions
 
             return services;
         }
+
+        #endregion
     }
 }

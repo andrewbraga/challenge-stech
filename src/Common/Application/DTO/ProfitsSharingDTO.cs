@@ -27,7 +27,7 @@ namespace Application.DTO
         {
             get
             {
-                return EmployeeQuantity.ToString("N", CultureInfo);
+                return EmployeeQuantity.ToString("N0", CultureInfo);
             }
         }
 

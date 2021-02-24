@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface da conexão de dados da aplicação
     /// </summary>
-    public interface IRedisConnection
+    public interface IApplicationDb
     {
         #region Public Methods
 

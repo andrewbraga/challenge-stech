@@ -1,30 +1,22 @@
-﻿using Infrastructure.Persistence.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using System.Threading.Tasks;
+using Infrastructure.Persistence.Interfaces;
+using Microsoft.Extensions.Caching.Distributed;
 using StackExchange.Redis;
 
 namespace Infrastructure.Persistence
 {
     /// <summary>
-    /// Conxexão de dados da aplicação
+    /// Banco de dados da aplicação
     /// </summary>
-    public class RedisConnection : IRedisConnection
+    public class ApplicationDb : IApplicationDb
     {
-
-        #region Constants
-
-        /// <summary>
-        /// Nome da conexão do Redis
-        /// </summary>
-        private const string CONNECTION_NAME = "Redis";
-
-        #endregion
 
         #region Private Properties
 
         /// <summary>
-        /// Instância do banco de dados Redis
+        /// Instância do cliente do banco de dados Redis
         /// </summary>
-        private IDatabase DataBase { get; }
+        private IDatabase Database { get; }
 
         #endregion
 
@@ -33,12 +25,10 @@ namespace Infrastructure.Persistence
         /// <summary>
         /// Construtor
         /// </summary>
-        /// <param name="configuration">Instância do configuração da aplicação</param>
-        public RedisConnection(IConfiguration configuration)
+        /// <param name="connectionMultiplexer">Conexão do banco de dados Redis</param>
+        public ApplicationDb(IConnectionMultiplexer connectionMultiplexer)
         {
-            var connection = ConnectionMultiplexer.Connect(configuration.GetConnectionString(CONNECTION_NAME));
-
-            DataBase = connection.GetDatabase();
+            Database = connectionMultiplexer.GetDatabase();
         }
 
         #endregion
@@ -52,7 +42,7 @@ namespace Infrastructure.Persistence
         /// <returns>Valor armazenado no contexto</returns>
         public string GetValueFromKey(string key)
         {
-            return DataBase.StringGet(key);
+            return Database.StringGet(key);
         }
 
         /// <summary>
@@ -62,7 +52,7 @@ namespace Infrastructure.Persistence
         /// <param name="value">Valor</param>
         public void SetValueToKey(string key, string value)
         {
-            DataBase.StringSet(key, value);
+            Database.StringSet(key, value);
         }
 
         #endregion

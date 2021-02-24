@@ -56,9 +56,9 @@ namespace Application.ProfitSharing.Queries.GetProfitSharing
         #region Private Properties
 
         /// <summary>
-        /// Conexão de dados da aplicação
+        /// Banco de dados da aplicação
         /// </summary>
-        private IRedisConnection Connection { get; }
+        private IApplicationDb ApplicationDb { get; }
 
         #endregion
 
@@ -67,10 +67,10 @@ namespace Application.ProfitSharing.Queries.GetProfitSharing
         /// <summary>
         /// Construtor
         /// </summary>
-        /// <param name="connection">Conexão de dados da aplicação</param>
-        public GetProfitSharingQueryHandler(IRedisConnection connection)
+        /// <param name="applicationDb">Banco de dados da aplicação</param>
+        public GetProfitSharingQueryHandler(IApplicationDb applicationDb)
         {
-            Connection = connection;
+            ApplicationDb = applicationDb;
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace Application.ProfitSharing.Queries.GetProfitSharing
         /// <returns></returns>
         public async Task<ServiceResult<ProfitsSharingDTO>> Handle(GetProfitSharingQuery request, CancellationToken cancellationToken)
         {
-            var employees = JsonSerializer.Deserialize<IEnumerable<Employee>>(Connection.GetValueFromKey(EMPLOYEE_KEY));
+            var employees = JsonSerializer.Deserialize<IEnumerable<Employee>>(ApplicationDb.GetValueFromKey(EMPLOYEE_KEY));
 
             if (!employees.Any())
             {
