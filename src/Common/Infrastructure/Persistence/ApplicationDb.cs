@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using Infrastructure.Persistence.Interfaces;
-using Microsoft.Extensions.Caching.Distributed;
+﻿using Infrastructure.Persistence.Interfaces;
 using StackExchange.Redis;
 
 namespace Infrastructure.Persistence

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Common.Models;
-using Application.DTO;
 using Application.ProfitSharing.Queries.GetProfitSharing;
 using Domain.Entities;
 using Infrastructure.Persistence.Interfaces;
